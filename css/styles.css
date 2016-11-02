@@ -8,6 +8,11 @@
 .text_centered {
   text-align: center;
 }*/
+
+body {
+  font-family: 'Shrikhand', cursive;
+
+}
 .jumbotron {
   background-color: transparent;
   text-align: center;
@@ -18,14 +23,21 @@ h1 {
   font-size: 40pt;
 }
 
+#play {
+  padding: 50px;
+}
 
 #reset {
   display: none;
 }
 
 .row {
-  height: 100px;
-  min-height: 100px;
+  height: 150px;
+  min-height: 150px;
+}
+
+#row-min {
+  display: none;
 }
 
 #boardcontainer {
@@ -37,10 +49,12 @@ h1 {
 #boardcontainer .col-md-4 {
   /*border: 1px solid black;*/
   height: 100%;
-  width: 33%;
+  width: 33.33333333%;
+  /*max-width: 150px;*/
   /*min-height: 100px;*/
   /*min-width: 100px;*/
 }
+
 
 #r0c0 {
   border-top: none;

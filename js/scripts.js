@@ -1,42 +1,60 @@
+var gameOver = false;
+var playerTurn = 0;
+var moveCounter = 0;
 var board = [
   [0,0,0],
   [0,0,0],
   [0,0,0] ];
 
-var gameOver = false;
-var playerTurn = 0;
-var moveCounter = 0;
-
 $(document).ready(function() {
+  $("#play").on('click', function() {
+    $("#row-min").fadeIn(600);
+    $("#play").hide();
+  });
   $("#game-status").text("Player 1's turn!");
   $("#reset").on('click', function() {
     resetBoard();
   });
   $(".col-md-4").on('click', function() {
-   var coordinates = this.id;
-   if ((checkIfPopulated(coordinates) === false) && (gameOver != true)) {
-     if (playerTurn === 0) {
-       populateArray(coordinates, "x");
-       $(".x", this).show();
-       $("#game-status").text("Player 2 Go!");
-     } else if (playerTurn === 1) {
-       populateArray(coordinates, "o");
-       $(".o", this).show();
-       $("#game-status").text("Player 1 Go!");
-
-     }
-    playerTurn ^= 1;
-    moveCounter++;
-    traverseBoard(board);
-    if (moveCounter === 9 && gameOver != true) {
-      gameOver = true;
-      $("#game-status").text("Draw!");
-      $("#reset").show();
-
+    var columnClicked = this;
+    var coordinates = this.id;
+    if ((checkIfPopulated(coordinates) === false) && (gameOver != true)) {
+      playerPlaceMarker(columnClicked, coordinates);
+      nextMove();
+      incrementMove();
+      traverseBoard(board);
+      checkDraw();
     }
-   }
  });
 });
+
+function playerPlaceMarker(columnClicked, coordinates) {
+   if (playerTurn === 0) {
+     populateArray(coordinates, "x");
+     $(".x", columnClicked).show();
+     $("#game-status").text("Player 2 Go!");
+   } else if (playerTurn === 1) {
+     populateArray(coordinates, "o");
+     $(".o", columnClicked).show();
+     $("#game-status").text("Player 1 Go!");
+   }
+}
+
+function nextMove() {
+  playerTurn ^= 1;
+}
+
+function incrementMove() {
+  moveCounter++;
+}
+
+function checkDraw() {
+  if (moveCounter === 9 && gameOver != true) {
+    gameOver = true;
+    $("#game-status").text("Draw!");
+    $("#reset").show();
+  }
+}
 
 function resetBoard() {
   board = [
