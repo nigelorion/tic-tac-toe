@@ -11,51 +11,63 @@
   <body>
     <div class="container">
       <div class="jumbotron text_centered">
-        <h2>Some Lame-O Title Right Here</h2>
+        <h1>TIC TAC TOE!</h1>
+
       </div>
-      <div id="boardcontainer" class="centered">
-        <div class="row"> <!--Start Row-->
-          <div class="col-md-4" id="0-0">
-            <img src="img/o-symbol.png" class="o">
-            <img src="img/x-symbol.png" class="x">
+      <div class="row" id="row-min">
+        <div class="col-xs-0 col-md-3">
+          <h1 id="game-status"><h1>
+        </div>
+        <div class="col-xs-12 col-md-6">
+        <div id="boardcontainer">
+          <div class="row"> <!--Start Row-->
+            <div class="col-md-4 col-xs-4" id="r0c0">
+              <img src="img/o-symbol.png" class="o">
+              <img src="img/x-symbol.png" class="x">
+            </div>
+            <div class="col-md-4 col-xs-4" id="r0c1">
+              <img src="img/o-symbol.png" class="o">
+              <img src="img/x-symbol.png" class="x">
+            </div>
+            <div class="col-md-4 col-xs-4" id="r0c2">
+              <img src="img/o-symbol.png" class="o">
+              <img src="img/x-symbol.png" class="x">
+            </div>
+          </div> <!--End Row-->
+          <div class="row"> <!--Start Row-->
+            <div class="col-md-4 col-xs-4" id="r1c0">
+              <img src="img/o-symbol.png" class="o">
+              <img src="img/x-symbol.png" class="x">
+            </div>
+            <div class="col-md-4 col-xs-4" id="r1c1">
+              <img src="img/o-symbol.png" class="o">
+              <img src="img/x-symbol.png" class="x">
+            </div>
+            <div class="col-md-4 col-xs-4" id="r1c2">
+              <img src="img/o-symbol.png" class="o">
+              <img src="img/x-symbol.png" class="x">
+            </div>
+          </div> <!--End Row-->
+          <div class="row"> <!--Start Row-->
+            <div class="col-md-4 col-xs-4" id="r2c0">
+              <img src="img/o-symbol.png" class="o">
+              <img src="img/x-symbol.png" class="x">
+            </div>
+            <div class="col-md-4 col-xs-4" id="r2c1">
+              <img src="img/o-symbol.png" class="o">
+              <img src="img/x-symbol.png" class="x">
+            </div>
+            <div class="col-md-4 col-xs-4" id="r2c2">
+              <img src="img/o-symbol.png" class="o">
+              <img src="img/x-symbol.png" class="x">
+            </div>
+          </div> <!--End Row-->
+
           </div>
-          <div class="col-md-4" id="0-1">
-            <img src="img/o-symbol.png" class="o">
-            <img src="img/x-symbol.png" class="x">
-          </div>
-          <div class="col-md-4" id="0-2">
-            <img src="img/o-symbol.png" class="o">
-            <img src="img/x-symbol.png" class="x">
-          </div>
-        </div> <!--End Row-->
-        <div class="row"> <!--Start Row-->
-          <div class="col-md-4" id="1-0">
-            <img src="img/o-symbol.png" class="o">
-            <img src="img/x-symbol.png" class="x">
-          </div>
-          <div class="col-md-4" id="1-1">
-            <img src="img/o-symbol.png" class="o">
-            <img src="img/x-symbol.png" class="x">
-          </div>
-          <div class="col-md-4" id="1-2">
-            <img src="img/o-symbol.png" class="o">
-            <img src="img/x-symbol.png" class="x">
-          </div>
-        </div> <!--End Row-->
-        <div class="row"> <!--Start Row-->
-          <div class="col-md-4" id="2-0">
-            <img src="img/o-symbol.png" class="o">
-            <img src="img/x-symbol.png" class="x">
-          </div>
-          <div class="col-md-4" id="2-1">
-            <img src="img/o-symbol.png" class="o">
-            <img src="img/x-symbol.png" class="x">
-          </div>
-          <div class="col-md-4" id="2-2">
-            <img src="img/o-symbol.png" class="o">
-            <img src="img/x-symbol.png" class="x">
-          </div>
-        </div> <!--End Row-->
+        </div>
+        <div class="col-xs-0 col-md-3">
+          <button type="btn" id="reset">Play Again?</button>
+        </div>
       </div>
     </div>
   </body>

@@ -13,9 +13,3 @@
 * If user clicks on an occupied square, nothing will happen
 * When game is over, user will be prompted to play again
  * This option will reload the board
-
-(row, col)
-
-(0,0) (0,1) (0,2)
-(1,0) (1,1) (1,2)
-(2,0) (2,1) (2,2)
