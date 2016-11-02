@@ -1,0 +1,29 @@
+.centered {
+  display: inline-block;
+  margin-left: 400px;
+  margin-right: auto;
+  text-align: center;
+}
+
+.text_centered {
+  text-align: center;
+}
+
+.col-md-4 {
+  border: 1px solid black;
+  height: 100px;
+  width: 100px;
+}
+
+img {
+  height: 80px;
+  width: 80px;
+}
+
+.o {
+  display: none;
+}
+
+.x {
+  display: none;
+}
