@@ -32,25 +32,31 @@ $(document).ready(function() {
       if ((needsToWin === true) && (checkIfPopulated(winCoords) === false) && (gameOver != true)) {
         placeWin(winCoords);
         needsToWin = false;
-        winCoords = ""
+        winCoords = "";
+        console.log("Win!");
       } else if ((needsToBlock === true) && (checkIfPopulated(blockCoords) === false) && (gameOver != true)) {
         placeBlock(blockCoords);
         needsToBlock = false;
-        blockCoords = ""
+        blockCoords = "";
+        console.log("Block!");
       } else if ((checkIfPopulated(center) === false) && (gameOver != true)) {
         placeCenter(center);
+        console.log("Center!");
       } else if (checkIfPopulated(invertCoordinates(coordinates)) === false && gameOver != true) {
         placeOppositeCorner(coordinates);
+        console.log("Opposite!");
       } else if (gameOver != true) {
+        console.log("start random function");
         var randCoordinates = "r" + getRandomIndex(0, 2) + "c" + getRandomIndex(0, 2);
-        while (checkIfPopulated(randCoordinates) != false) {
+        console.log(randCoordinates);
+        while (checkIfPopulated(randCoordinates) === true) {
           randCoordinates = "r" + getRandomIndex(0, 2) + "c" + getRandomIndex(0, 2);
           console.log(randCoordinates);
         }
-        console.log(randCoordinates);
+        console.log("Random!");
         placeRandom(randCoordinates);
       }
-      nextMove();
+      // nextMove();
       incrementMove();
       traverseBoard(board);
       checkDraw();
@@ -98,6 +104,7 @@ function placeRandom(coordinates) {
 }
 
 function getRandomIndex(min, max) {
+  console.log(Math.round(Math.random() * (max-min) + min));
   return Math.round(Math.random() * (max-min) + min);
 }
 
@@ -128,6 +135,10 @@ function resetBoard() {
     gameOver = false;
     playerTurn = 0;
     moveCounter = 0;
+    needsToBlock = false;
+    needsToWin = false;
+    blockCoords = "";
+    winCoords = "";
 }
 
 function populateArray(squareClicked, playerMarker) {
@@ -135,11 +146,15 @@ function populateArray(squareClicked, playerMarker) {
 }
 
 function checkIfPopulated(squareClicked) {
-  if (board[parseInt(squareClicked.charAt(1))][parseInt(squareClicked.charAt(3))] != 0) {
-    return true;
-  }
-  else {
-    return false;
+  if (squareClicked.length === 4) {
+    if (board[parseInt(squareClicked.charAt(1))][parseInt(squareClicked.charAt(3))] != 0) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  } else {
+    console.log("String is empty");
   }
 }
 
@@ -149,14 +164,17 @@ function traverseBoard(mdArray) {
     for (i = 0; i < 3; i++) {
       solution += mdArray[j][i];
     }
+    if (checkWin(solution) === true) {
+      needsToWin = true;
+      winCoords = "r" + j + "c" + solution.indexOf("0");
+      checkVictory(solution);
+    }
     if (checkBlock(solution) === true) {
       needsToBlock = true;
       blockCoords = "r" + j + "c" + solution.indexOf("0");
-      console.log(solution.indexOf("0"));
-      console.log(blockCoords);
+      checkVictory(solution);
     }
     checkVictory(solution);
-
   }
 
   for (j = 0; j < 3; j++) {
@@ -167,24 +185,25 @@ function traverseBoard(mdArray) {
     if (checkWin(solution) === true) {
       needsToWin = true;
       winCoords = "r" + solution.indexOf("0") + "c" + j;
+      checkVictory(solution);
     } if (checkBlock(solution) === true) {
       needsToBlock = true;
       blockCoords = "r" + solution.indexOf("0") + "c" + j;
-    checkVictory(solution);
+      checkVictory(solution);
     }
+    checkVictory(solution);
   }
 
   var diag1 = "";
   for (j = 0; j < 3; j++) {
     var i = j;
     diag1 += mdArray[i][j];
-    if (checkWin(solution) === true) {
+    if (checkWin(diag1) === true) {
       needsToWin = true;
-      winCoords = "r" + solution.indexOf("0") + "c" + solution.indexOf("0");
-    } if (checkBlock(solution) === true) {
+      winCoords = "r" + diag1.indexOf("0") + "c" + diag1.indexOf("0");
+    } if (checkBlock(diag1) === true) {
       needsToBlock = true;
-      blockCoords = "r" + solution.indexOf("0") + "c" + solution.indexOf("0");
-    checkVictory(solution);
+      blockCoords = "r" + diag1.indexOf("0") + "c" + diag1.indexOf("0");
     }
     checkVictory(diag1);
   }
@@ -193,15 +212,41 @@ function traverseBoard(mdArray) {
   for (j = 0; j < 3; j++) {
     var i = (2 - j);
     diag2 += mdArray[i][j];
-    if (checkWin(solution) === true) {
-      needsToWin = true;
-      winCoords = "r" + solution.indexOf("0") + "c" + solution.indexOf("0");
-    } if (checkBlock(solution) === true) {
-      needsToBlock = true;
-      blockCoords = "r" + solution.indexOf("0") + "c" + solution.indexOf("0");
-    checkVictory(solution);
+    if (i === 0) {
+      if (checkWin(diag2) === true) {
+
+        if (diag2.indexOf("0") === 0) {
+          needsToWin = true;
+          winCoords = "r2c0";
+        } else if (diag2.indexOf("0") === 1) {
+          needsToWin = true;
+          winCoords = "r1c1";
+        } else if (diag2.indexOf("0") === 2) {
+          needsToWin = true;
+          winCoords = "r0c2";
+        } else {
+          return -1;
+        }
+      }
+      if (checkBlock(diag2) === true) {
+          if (diag2.indexOf("0") === 0) {
+            needsToBlock = true;
+            blockCoords = "r2c0";
+            checkVictory(diag2);
+          } else if (diag2.indexOf("0") === 1) {
+            needsToBlock = true;
+            blockCoords = "r1c1";
+            checkVictory(diag2);
+          } else if (diag2.indexOf("0") === 2) {
+            needsToBlock = true;
+            blockCoords = "r0c2";
+            checkVictory(diag2);
+          } else {
+            return -1;
+          }
+      }
+      checkVictory(diag2);
     }
-    checkVictory(diag2);
     // checkBlock(diag2);
   }
 
@@ -235,9 +280,9 @@ function traverseBoard(mdArray) {
       return false;
     }
   }
-  console.log(board[0][0] + "|" + board[0][1] + "|" + board[0][2])
-  console.log(board[1][0] + "|" + board[1][1] + "|" + board[1][2])
-  console.log(board[2][0] + "|" + board[2][1] + "|" + board[2][2])
+  // console.log(board[0][0] + "|" + board[0][1] + "|" + board[0][2])
+  // console.log(board[1][0] + "|" + board[1][1] + "|" + board[1][2])
+  // console.log(board[2][0] + "|" + board[2][1] + "|" + board[2][2])
 }
 
 function invertCoordinates(coordinates) {
