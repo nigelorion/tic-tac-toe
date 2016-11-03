@@ -14,6 +14,44 @@
 * When game is over, user will be prompted to play again
  * This option will reload the board
 
+
+If computer has two in a row, and third square is unoccupied, place in unoccupied square
+If human has two in a row, and third square is unoccupied, place in unoccupied square
+Create an opportunity where computer has two threats to wins
+Block human fork if human is preparing one
+Place mark in center
+Place mark in opposite corner
+Place marker in empty corner
+Place marker in empty side
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 coordinates1
 
 (0,0)(0,1)(0,2)
